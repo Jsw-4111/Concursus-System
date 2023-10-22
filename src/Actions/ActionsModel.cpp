@@ -1,12 +1,16 @@
 #include "ActionsModel.h"
 
-class ActionsModel {
-    public:
-        ActionsModel(float time, bool willOverrideMovement, ActionTypes typeOfAction) {
-            completionTime = time;
-            overridesMovement = willOverrideMovement;
-            actionType = typeOfAction;
-        }
+class ActionsModel: public ActionsModel {
+public:
+    float completionTime;
+    bool overridesMovement;
+    ActionTypes actionType;
 
-        virtual void performAction() = 0;
+    ActionsModel(float time, bool willOverrideMovement, ActionTypes typeOfAction) {
+        completionTime = time;
+        overridesMovement = willOverrideMovement;
+        actionType = typeOfAction;
+    }
+
+    void performAction() {}
 };
