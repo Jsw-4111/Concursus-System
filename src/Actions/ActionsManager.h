@@ -16,7 +16,7 @@ public:
 
     ActionsManager();
 
-    void queueAction(ActionsModel action);
+    void queueAction(ActionsModel& action);
     void clearActions();
     void startNextAction();
     void actionComplete();

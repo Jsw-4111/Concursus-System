@@ -11,7 +11,7 @@ public:
         actionCompleted = false;
     }
 
-    void queueAction(ActionsModel action) {
+    void queueAction(ActionsModel& action) {
         actionQueue.push_back(action);
         if(currentAction == nullopt) {
             startNextAction();

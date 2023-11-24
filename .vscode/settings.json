@@ -2,6 +2,8 @@
     "cmake.sourceDirectory": "C:/Program Files (x86)/Coding Practice/Game Dev/Concursus-System/Engine-Specific/Godot/godot-cpp",
     "files.associations": {
         "string": "cpp",
-        "optional": "cpp"
+        "optional": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp"
     }
 }
