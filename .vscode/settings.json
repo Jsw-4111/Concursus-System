@@ -1,5 +1,5 @@
 {
-    "cmake.sourceDirectory": "C:/Program Files (x86)/Coding Practice/Game Dev/Concursus-System/Engine-Specific/Godot/godot-cpp",
+    "cmake.sourceDirectory": "/home/syvirx/Documents/workstation/Game-Dev/Concursus-System",
     "files.associations": {
         "string": "cpp",
         "optional": "cpp",

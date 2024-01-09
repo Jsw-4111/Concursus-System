@@ -1,13 +1,12 @@
 #ifndef INPUTHANDLER_H
 #define INPUTHANDLER_H
 
-#include "../CharacterControllers/CharacterController.h"
-#include "../Helpers/Inputs_Enums.h"
+// #include "CharacterController.h"
+#include "Inputs_Enums.h"
 
-class InputHander{
-    public:
-
-    CharacterController characterController;
+class InputHandler {
+public:
+    // CharacterController characterController;
 
 // Receives the player movement commands. Event receives key pressed, position returns
 // the world location of the clicked location on a collidable WalkableTerrain object.

@@ -1,35 +1,40 @@
 cmake_minimum_required(VERSION 3.14)
 project(Concursus-System--Tests VERSION 0.1 LANGUAGES CXX)
-add_executable(${PROJECT_NAME}
-    main.cpp
+
+include(FetchContent)
+FetchContent_Declare(
+    doctest
+    GIT_REPOSITORY https://github.com/doctest/doctest.git
+    GIT_TAG v2.4.11
+)
+FetchContent_MakeAvailable(doctest)
+
+set(INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include" CACHE INTERNAL "Path to include folder for project")
+
+include_directories(
+    ${INCLUDE_DIR}/Actions
+    ${INCLUDE_DIR}/Helpers
+    ${INCLUDE_DIR}/Inputs
+    ${INCLUDE_DIR}/doctest
+    ${CMAKE_SOURCE_DIR}/tests/include
 )
 
+include(CTest)
+enable_testing()
 
-# include(ExternalProject)
-# find_package(Git REQUIRED)
+add_subdirectory(src)
+target_link_libraries(src-main INTERFACE doctest)
 
-# ExternalProject_Add(
-#     doctest
-#     PREFIX ${CMAKE_BINARY_DIR}/doctest
-#     GIT_REPOSITORY https://github.com/doctest/doctest.git
-#     TIMEOUT 10
-#     UPDATE_COMMAND ${GIT_EXECUTABLE} pull
-#     CONFIGURE_COMMAND ""
-#     BUILD_COMMAND ""
-#     INSTALL_COMMAND ""
-#     LOG_DOWNLOAD ON
-# )
+add_subdirectory(tests)
+target_link_libraries(test-main INTERFACE src-main)
 
-# # Expose required variable (DOCTEST_INCLUDE_DIR) to parent scope
-# ExternalProject_Get_Property(doctest source_dir)
-# set(DOCTEST_INCLUDE_DIR ${source_dir}/doctest CACHE INTERNAL "Path to include folder for doctest")
+SET(SOURCES
+    ${test_sources}
+)
 
+add_executable(${CMAKE_PROJECT_NAME} tests/test-main.cpp ${SOURCES})
 
-# add_executable(${PROJECT_NAME} tests/test-main.cpp)
-
-# # add_subdirectory(src)
-# add_subdirectory(tests)
-
-# enable_testing()
-# target_include_directories(${PROJECT_NAME} PUBLIC ${DOCTEST_INCLUDE_DIR})
-# target_link_libraries(${PROJECT_NAME} PRIVATE test_library)
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC 
+    src-main
+    doctest::doctest
+)
