@@ -2,15 +2,16 @@
 #define ACTIONSMODEL_H
 
 #include <string>
-#include "../Helpers/Enums.h"
+#include "Enums.h"
 
 // This is the model for the basic actions available in the system.
 // Used as a guideline for actions that can be passed to the manager.
 
 class ActionsModel {
 public:
-    ActionsModel(float time, bool willOverrideMovement, ActionTypes typeOfAction);
     // This should be extended for all actions you plan to have in game.
+    ActionsModel(float time, bool willOverrideMovement, ActionTypes typeOfAction);
+    virtual ~ActionsModel();
 
     // Time, in seconds, for action to complete. Used for syncing.
     // animations.
@@ -24,7 +25,7 @@ public:
 
     // Don't know if this should be defined in engine-specific code or not.
     // We plan to use the engine-specific signalling processes in Godot.
-    void performAction();
+    virtual void performAction();
 };
 
 #endif

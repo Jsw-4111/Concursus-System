@@ -1,43 +1,39 @@
 #include "ActionsManager.h"
 
-class ActionsManager: public ActionsManager {
-public:
-    deque<ActionsModel> actionQueue;
-
-    optional<ActionsModel> currentAction;
-    bool actionCompleted;
-
-    ActionsManager() {
-        actionCompleted = false;
+    ActionsManager::ActionsManager() {
+        currentActionPtr = NULL;
+        actionQueue.clear();
     }
 
-    void queueAction(ActionsModel action) {
+    ActionsManager::~ActionsManager() {
+        clearActions();
+        startNextAction();
+    }
+
+    void ActionsManager::queueAction(ActionsModel* action) {
         actionQueue.push_back(action);
-        if(currentAction == nullopt) {
+        if(currentActionPtr == NULL) {
             startNextAction();
         }
     }
 
-    void clearActions() {
+    void ActionsManager::clearActions() {
         actionQueue.clear();
     }
 
-    void startNextAction() {
+    void ActionsManager::startNextAction() {
         if (actionQueue.size() > 0) {
-            currentAction = actionQueue.front();
+            currentActionPtr = actionQueue.front();
             actionQueue.pop_front();
         } else { 
-            currentAction.reset();
+            currentActionPtr = NULL;
         }
-        actionCompleted = false;
     }
 
-    void actionComplete() {
-        actionCompleted = true;
+    void ActionsManager::actionComplete() {
         startNextAction();
     }
 
-    void undoAction() {
+    void ActionsManager::undoAction() {
         actionQueue.pop_back();
     }
-};
