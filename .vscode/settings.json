@@ -1,9 +1,0 @@
-{
-    "cmake.sourceDirectory": "/home/syvirx/Documents/workstation/Game-Dev/Concursus-System",
-    "files.associations": {
-        "string": "cpp",
-        "optional": "cpp",
-        "ostream": "cpp",
-        "iostream": "cpp"
-    }
-}
