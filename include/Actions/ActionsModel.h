@@ -1,7 +1,6 @@
 #ifndef ACTIONSMODEL_H
 #define ACTIONSMODEL_H
 
-#include <string>
 #include "Enums.h"
 
 // This is the model for the basic actions available in the system.

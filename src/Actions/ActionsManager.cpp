@@ -21,6 +21,14 @@
         actionQueue.clear();
     }
 
+    void ActionsManager::actionComplete() {
+        startNextAction();
+    }
+
+    void ActionsManager::undoAction() {
+        actionQueue.pop_back();
+    }
+
     void ActionsManager::startNextAction() {
         if (actionQueue.size() > 0) {
             currentActionPtr = actionQueue.front();
@@ -28,12 +36,4 @@
         } else { 
             currentActionPtr = NULL;
         }
-    }
-
-    void ActionsManager::actionComplete() {
-        startNextAction();
-    }
-
-    void ActionsManager::undoAction() {
-        actionQueue.pop_back();
     }

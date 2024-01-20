@@ -5,8 +5,6 @@
 #include <optional>
 #include "ActionsModel.h"
 
-using namespace std;
-
 class ActionsManager {
 public:
     std::deque<ActionsModel*> actionQueue;
@@ -19,9 +17,10 @@ public:
     void queueAction(ActionsModel* actionPtr);
     void clearActions();
 
-    // Should this be private? All instances of starting should come from queueAction and actionComplete
-    void startNextAction();
     void actionComplete();
     void undoAction();
+
+private:
+    void startNextAction();
 };
 #endif

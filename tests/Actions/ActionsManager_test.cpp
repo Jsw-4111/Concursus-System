@@ -2,8 +2,6 @@
 #include "ActionsManager.h"
 #include "MockActionsModel.h"
 
-#include <iostream>
-
 ActionsManager subject;
 ActionsModel mockAction1 = MockActionsModel(0.0f, false, movement);
 ActionsModel mockAction2 = MockActionsModel(0.0f, false, attack);
@@ -11,7 +9,7 @@ ActionsModel mockAction3 = MockActionsModel(0.0f, false, movement);
 ActionsModel mockAction4 = MockActionsModel(0.0f, false, interaction);
 ActionsModel mockAction5 = MockActionsModel(0.0f, false, movement);
 
-deque<ActionsModel*> mockQueue;
+std::deque<ActionsModel*> mockQueue;
 
 void setup() {
     subject = ActionsManager();
@@ -57,25 +55,16 @@ TEST_CASE("ActionsModel::startNextAction") {
         setup();
         REQUIRE(subject.actionQueue.size() > 0);
 
-        subject.startNextAction();
+        subject.queueAction(&mockAction1);
 
         ActionsModel* actualActionPtr = subject.currentActionPtr;
 
         CHECK(actualActionPtr == &mockAction1);
     }
-
-    SUBCASE("actionQueue is empty") {
-        subject = ActionsManager();
-
-        REQUIRE(subject.actionQueue.size() == 0);
-
-        subject.startNextAction();
-
-        CHECK(subject.currentActionPtr == NULL);
-    }
 }
 
 TEST_CASE("ActionsModel::actionComplete") {
+    subject = ActionsManager();
     subject.queueAction(&mockAction1);
 
     subject.actionComplete();
